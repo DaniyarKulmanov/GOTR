@@ -3,6 +3,7 @@ package main
 import (
 	"GOTR/GoSearch/pkg/crawler"
 	"GOTR/GoSearch/pkg/crawler/spider"
+	"GOTR/GoSearch/pkg/index"
 	"flag"
 	"fmt"
 	"strings"
@@ -36,4 +37,6 @@ func main() {
 		}
 	}
 	fmt.Println(data)
+
+	index.CreateIndex(data)
 }
