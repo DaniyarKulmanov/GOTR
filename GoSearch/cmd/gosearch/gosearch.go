@@ -12,9 +12,11 @@ import (
 func main() {
 	var data []crawler.Document
 	var search string
-	sts := [2]string{
+	sts := [4]string{
 		"https://go.dev/",
 		"https://www.programiz.com/golang/",
+		"https://en.wikipedia.org/wiki/Merge_sort",
+		"https://golangify.com/array",
 	}
 	s := spider.New()
 	flag.StringVar(&search, "s", "", "search links")
@@ -22,7 +24,7 @@ func main() {
 
 	for i := range sts {
 		result, err := s.Scan(sts[i], 1)
-
+		result[0].ID = len(data) + 1
 		if err != nil {
 			fmt.Println(err)
 			continue
