@@ -2,14 +2,15 @@ package index
 
 import (
 	"GOTR/GoSearch/pkg/crawler"
-	"fmt"
+	"strings"
 )
 
-func CreateIndex(data []crawler.Document) {
-	mapIndex := make(map[string][]int)
-	mapIndex["For"] = []int{1}
-	mapIndex["Go"] = []int{0, 1}
+var MapIndex = make(map[string][]int)
 
-	fmt.Println(mapIndex)
-	fmt.Println(data[0])
+func Create(data crawler.Document) {
+	words := strings.Fields(data.Title)
+
+	for _, v := range words {
+		MapIndex[v] = append(MapIndex[v], data.ID)
+	}
 }

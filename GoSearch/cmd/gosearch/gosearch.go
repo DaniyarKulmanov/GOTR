@@ -30,6 +30,7 @@ func main() {
 			continue
 		}
 
+		// append data and collect index
 		if search != "" {
 			if strings.Contains(sts[i], search) {
 				data = append(data, result...)
@@ -37,8 +38,8 @@ func main() {
 		} else {
 			data = append(data, result...)
 		}
+		index.Create(result[0])
 	}
 	fmt.Println(data)
-
-	index.CreateIndex(data)
+	fmt.Println(index.MapIndex)
 }
