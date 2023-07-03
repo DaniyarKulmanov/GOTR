@@ -1,7 +1,6 @@
 package main
 
 import (
-	"GOTR/GoSearch/pkg/crawler"
 	"GOTR/GoSearch/pkg/crawler/spider"
 	"GOTR/GoSearch/pkg/index"
 	"flag"
@@ -10,8 +9,8 @@ import (
 )
 
 func main() {
-	var data []crawler.Document
 	var search string
+	var depth int
 	sts := [4]string{
 		"https://go.dev/",
 		"https://www.programiz.com/golang/",
@@ -20,27 +19,27 @@ func main() {
 	}
 	s := spider.New()
 	flag.StringVar(&search, "s", "", "search links")
+	flag.IntVar(&depth, "d", 1, "depth size")
 	flag.Parse()
 
 	for i := range sts {
-		result, err := s.Scan(sts[i], 1)
-		result[0].ID = len(data) + 1
+		result, err := s.Scan(sts[i], depth)
+		result[0].ID = len(index.Documents) + 1
+
 		if err != nil {
 			fmt.Println(err)
 			continue
 		}
 
-		// append data and collect index
 		if search != "" {
 			if strings.Contains(sts[i], search) {
-				data = append(data, result...)
+				index.Create(result[0])
 			}
 		} else {
-			data = append(data, result...)
+			index.Create(result[0])
+
 		}
-		index.Create(result[0])
 	}
-	//fmt.Println(data)
 	fmt.Println(index.MapIndex)
 	fmt.Println(index.Documents)
 }
