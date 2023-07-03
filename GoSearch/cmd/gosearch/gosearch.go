@@ -40,6 +40,7 @@ func main() {
 		}
 		index.Create(result[0])
 	}
-	fmt.Println(data)
+	//fmt.Println(data)
 	fmt.Println(index.MapIndex)
+	fmt.Println(index.Documents)
 }
