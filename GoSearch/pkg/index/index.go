@@ -2,14 +2,20 @@ package index
 
 import (
 	"GOTR/GoSearch/pkg/crawler"
-	"fmt"
+	"sort"
+	"strings"
 )
 
-func CreateIndex(data []crawler.Document) {
-	mapIndex := make(map[string][]int)
-	mapIndex["For"] = []int{1}
-	mapIndex["Go"] = []int{0, 1}
+var MapIndex = make(map[string][]int)
+var Documents []crawler.Document
 
-	fmt.Println(mapIndex)
-	fmt.Println(data[0])
+func Create(data crawler.Document) {
+	words := strings.Fields(data.Title)
+	Documents = append(Documents, data)
+
+	for _, v := range words {
+		v = strings.ToLower(v)
+		MapIndex[v] = append(MapIndex[v], data.ID)
+	}
+	sort.Slice(Documents, func(i, j int) bool { return Documents[i].ID < Documents[j].ID })
 }
