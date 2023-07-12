@@ -39,6 +39,13 @@ func (n *Node) DeleteLast() {
 	tail.Next = nil
 }
 
+func (n *Node) DeleteFirst() {
+	fmt.Println("Deleting first node", n.Data)
+	n = n.Next
+	(n.Previous).Next = nil
+	n.Previous = nil
+}
+
 func main() {
 	newNode := Node{nil, 10, nil}
 	newNode.AddNode(20)
@@ -46,11 +53,12 @@ func main() {
 	newNode.AddNode(40)
 	newNode.PrintNode()
 	newNode.DeleteLast()
+	newNode.DeleteFirst()
 	newNode.PrintNode()
-	newNode.AddNode(50)
-	newNode.AddNode(60)
-	newNode.AddNode(70)
-	newNode.PrintNode()
-	newNode.DeleteLast()
-	newNode.PrintNode()
+	//newNode.AddNode(50)
+	//newNode.AddNode(60)
+	//newNode.AddNode(70)
+	//newNode.PrintNode()
+	//newNode.DeleteLast()
+	//newNode.PrintNode()
 }
