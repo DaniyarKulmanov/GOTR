@@ -1,64 +1,100 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-type Node struct {
-	Previous *Node
-	Data     int
-	Next     *Node
+type node struct {
+	data string
+	prev *node
+	next *node
+}
+type doublyLinkedList struct {
+	len  int
+	tail *node
+	head *node
 }
 
-var tail *Node
-
-func (n *Node) AddNode(data int) {
-	fmt.Println("Inserting node", data)
-	if tail == nil {
-		tail = n
+func initDoublyList() *doublyLinkedList {
+	return &doublyLinkedList{}
+}
+func (d *doublyLinkedList) AddFrontNodeDLL(data string) {
+	newNode := &node{
+		data: data,
 	}
-	n = tail
-	newNode := Node{n, data, nil}
-	n.Next = &newNode
-	tail = &newNode
+	if d.head == nil {
+		d.head = newNode
+		d.tail = newNode
+	} else {
+		newNode.next = d.head
+		d.head.prev = newNode
+		d.head = newNode
+	}
+	d.len++
 }
-
-func (n *Node) PrintNode() {
-	fmt.Println("Printing nodes")
-	iter := n
-	for iter != nil {
-		fmt.Println(iter.Data)
-		iter = iter.Next
+func (d *doublyLinkedList) AddEndNodeDLL(data string) {
+	newNode := &node{
+		data: data,
+	}
+	if d.head == nil {
+		d.head = newNode
+		d.tail = newNode
+	} else {
+		currentNode := d.head
+		for currentNode.next != nil {
+			currentNode = currentNode.next
+		}
+		newNode.prev = currentNode
+		currentNode.next = newNode
+		d.tail = newNode
+	}
+	d.len++
+}
+func (d *doublyLinkedList) TraverseForward() error {
+	if d.head == nil {
+		return fmt.Errorf("TraverseError: List is empty")
+	}
+	temp := d.head
+	for temp != nil {
+		fmt.Printf("value = %v, prev = %v, next = %v\n", temp.data, temp.prev, temp.next)
+		temp = temp.next
+	}
+	fmt.Println()
+	return nil
+}
+func (d *doublyLinkedList) Size() int {
+	return d.len
+}
+func (d *doublyLinkedList) ReverseDLL() {
+	currentNode := d.head
+	var nextInList *node
+	d.head, d.tail = d.tail, d.head
+	for currentNode != nil {
+		nextInList = currentNode.next
+		currentNode.next, currentNode.prev = currentNode.prev, currentNode.next
+		currentNode = nextInList
 	}
 }
-
-func (n *Node) DeleteLast() {
-	fmt.Println("Deleting last node", tail.Data)
-	tail = tail.Previous
-	(tail.Next).Previous = nil
-	tail.Next = nil
-}
-
-func (n *Node) DeleteFirst() {
-	fmt.Println("Deleting first node", n.Data)
-	n = n.Next
-	(n.Previous).Next = nil
-	n.Previous = nil
-}
-
 func main() {
-	newNode := Node{nil, 10, nil}
-	newNode.AddNode(20)
-	newNode.AddNode(30)
-	newNode.AddNode(40)
-	newNode.PrintNode()
-	newNode.DeleteLast()
-	newNode.DeleteFirst()
-	newNode.PrintNode()
-	//newNode.AddNode(50)
-	//newNode.AddNode(60)
-	//newNode.AddNode(70)
-	//newNode.PrintNode()
-	//newNode.DeleteLast()
-	//newNode.PrintNode()
+	doublyList := initDoublyList()
+	fmt.Printf("Add Front Node: C\n")
+	doublyList.AddFrontNodeDLL("C")
+	fmt.Printf("Add Front Node: B\n")
+	doublyList.AddFrontNodeDLL("B")
+	fmt.Printf("Add Front Node: A\n")
+	doublyList.AddFrontNodeDLL("A")
+	fmt.Printf("Add End Node: D\n")
+	doublyList.AddEndNodeDLL("D")
+	fmt.Printf("Add End Node: E\n")
+	doublyList.AddEndNodeDLL("E")
+	fmt.Printf("Size of doubly linked ist: %d\n", doublyList.Size())
+	err := doublyList.TraverseForward()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	fmt.Println("Reversing Doubly Linked List")
+	doublyList.ReverseDLL()
+	fmt.Printf("Size of doubly linked ist: %d\n", doublyList.Size())
+	err = doublyList.TraverseForward()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 }

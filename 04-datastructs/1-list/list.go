@@ -16,6 +16,8 @@ type Elem struct {
 	next, prev *Elem
 }
 
+var tail *List
+
 // New создаёт список и возвращает указатель на него.
 func New() *List {
 	var l List
@@ -52,13 +54,22 @@ func (l *List) String() string {
 
 // Pop удаляет первый элемент списка.
 func (l *List) Pop() *List {
-	e := l
+	e := *l
 	e.root.next = l.root.next.next
 	e.root.next.prev = nil
-	return e
+	return &e
 }
 
 // Reverse разворачивает список.
 func (l *List) Reverse() *List {
-	return nil
+	currentList := *l.root
+	var nextList *Elem
+	for currentList.next.Val != nil {
+		nextList = currentList.next
+		fmt.Println(nextList)
+		currentList.next = nextList.next
+		l.root.next = nextList.prev
+		l.root.prev = nextList.next
+	}
+	return l
 }
