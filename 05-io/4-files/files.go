@@ -1,6 +1,7 @@
 package main
 
 import (
+	"GOTR/03-algorithms/1-search"
 	"GOTR/GoSearch/pkg/crawler"
 	"fmt"
 	"io"
@@ -9,6 +10,13 @@ import (
 )
 
 func main() {
+	// scan data
+	sts := [2]string{
+		"https://go.dev/",
+		"https://www.programiz.com/golang/",
+	}
+	docs := search.ParseUrl(sts)
+	fmt.Println(docs)
 	// create file
 	f, err := os.Create("./file.txt")
 	if err != nil {
@@ -24,7 +32,6 @@ func main() {
 	}
 	// save data to file
 	//saveFile()
-
 }
 
 func saveFile(docs []crawler.Document, w io.Writer) error {
