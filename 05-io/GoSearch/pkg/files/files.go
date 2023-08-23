@@ -1,7 +1,7 @@
 package main
 
 import (
-	search "GOTR/03-algorithms/1-search"
+	"GOTR/05-io/GoSearch/pkg/search"
 	"GOTR/GoSearch/pkg/crawler"
 	"encoding/json"
 	"errors"
@@ -11,6 +11,7 @@ import (
 	"os"
 )
 
+// main TODO move to GoSearch/cmd/gosearch/gosearch.go
 func main() {
 	var docs []crawler.Document
 	content, err := os.ReadFile("test.json")
