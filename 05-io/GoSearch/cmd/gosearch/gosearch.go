@@ -1,10 +1,10 @@
 package main
 
 import (
-	"GOTR/03-algorithms/GoSearch/pkg/crawler"
-	"GOTR/03-algorithms/GoSearch/pkg/crawler/spider"
-	"GOTR/03-algorithms/GoSearch/pkg/index"
-	"GOTR/03-algorithms/GoSearch/pkg/search"
+	"GO_thinknetica/03-algorithms/GoSearch/pkg/crawler"
+	"GO_thinknetica/03-algorithms/GoSearch/pkg/crawler/spider"
+	"GO_thinknetica/03-algorithms/GoSearch/pkg/index"
+	"GO_thinknetica/03-algorithms/GoSearch/pkg/search"
 	"flag"
 	"fmt"
 )
