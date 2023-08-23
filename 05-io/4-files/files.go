@@ -36,12 +36,17 @@ func main() {
 }
 
 func scanUrl() (data []crawler.Document, err error) {
+	var file []byte
 	sts := [2]string{
 		"https://go.dev/",
 		"https://www.programiz.com/golang/",
 	}
 	data = search.ParseUrl(sts)
-	file, _ := json.MarshalIndent(data, "", " ")
-	err = os.WriteFile("test.json", file, 0644)
+	if file, err = json.MarshalIndent(data, "", " "); err != nil {
+		return nil, err
+	}
+	if err = os.WriteFile("test.json", file, 0644); err != nil {
+		return nil, err
+	}
 	return data, err
 }
