@@ -1,8 +1,9 @@
 package main
 
 import (
-	"GOTR/05-io/GoSearch/pkg/search"
-	"GOTR/GoSearch/pkg/crawler"
+	"GOTR/05-io/GoSearch/pkg/crawler"
+	"GOTR/05-io/GoSearch/pkg/crawler/spider"
+	"GOTR/05-io/GoSearch/pkg/index"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,7 +12,6 @@ import (
 	"os"
 )
 
-// main TODO move to GoSearch/cmd/gosearch/gosearch.go
 func main() {
 	var docs []crawler.Document
 	content, err := os.ReadFile("test.json")
@@ -42,7 +42,17 @@ func scanUrl() (data []crawler.Document, err error) {
 		"https://go.dev/",
 		"https://www.programiz.com/golang/",
 	}
-	data = search.ParseUrl(sts)
+	s := spider.New()
+
+	for i := range sts {
+		result, err := s.Scan(sts[i], 1)
+		if err != nil {
+			fmt.Println(err)
+			continue
+		}
+		index.Create(result[0])
+	}
+	data = index.Documents
 	if file, err = json.MarshalIndent(data, "", " "); err != nil {
 		return nil, err
 	}

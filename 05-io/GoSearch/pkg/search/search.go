@@ -1,7 +1,7 @@
 package search
 
 import (
-	"GOTR/03-algorithms/GoSearch/pkg/crawler"
+	"GOTR/05-io/GoSearch/pkg/crawler"
 )
 
 func Binary(words []int, allDocs []crawler.Document) []crawler.Document {

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"GOTR/03-algorithms/GoSearch/pkg/crawler"
-	"GOTR/03-algorithms/GoSearch/pkg/crawler/spider"
-	"GOTR/03-algorithms/GoSearch/pkg/index"
-	"GOTR/03-algorithms/GoSearch/pkg/search"
+	"GOTR/05-io/GoSearch/pkg/crawler"
+	"GOTR/05-io/GoSearch/pkg/crawler/spider"
+	"GOTR/05-io/GoSearch/pkg/index"
+	"GOTR/05-io/GoSearch/pkg/search"
 	"flag"
 	"fmt"
 )
@@ -12,7 +12,8 @@ import (
 func main() {
 	var word string
 	var depth int
-	var BinaryDocs []crawler.Document
+	var docs []crawler.Document
+
 	sts := [2]string{
 		"https://go.dev/",
 		"https://www.programiz.com/golang/",
@@ -31,8 +32,8 @@ func main() {
 		index.Create(result[0])
 	}
 	if word != "" {
-		BinaryDocs = search.Binary(index.MapIndex[word], index.Documents)
+		docs = search.Binary(index.MapIndex[word], index.Documents)
 	}
 	fmt.Println(index.Documents)
-	fmt.Println(BinaryDocs)
+	fmt.Println(docs)
 }

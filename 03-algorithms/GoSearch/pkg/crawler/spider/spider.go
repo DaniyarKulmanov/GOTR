@@ -3,7 +3,7 @@
 package spider
 
 import (
-	"GO_thinknetica/03-algorithms/GoSearch/pkg/crawler"
+	"GOTR/03-algorithms/GoSearch/pkg/crawler"
 	"net/http"
 	"strings"
 

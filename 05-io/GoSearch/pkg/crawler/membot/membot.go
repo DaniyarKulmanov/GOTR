@@ -1,7 +1,7 @@
 package membot
 
 import (
-	"GOTR/03-algorithms/GoSearch/pkg/crawler"
+	"GOTR/05-io/GoSearch/pkg/crawler"
 )
 
 // Service - имитация служба поискового робота.
