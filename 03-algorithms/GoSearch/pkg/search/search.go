@@ -1,7 +1,7 @@
-package __search
+package search
 
 import (
-	"GO_thinknetica/GoSearch/pkg/crawler"
+	"GOTR/03-algorithms/GoSearch/pkg/crawler"
 )
 
 func Binary(words []int, allDocs []crawler.Document) []crawler.Document {

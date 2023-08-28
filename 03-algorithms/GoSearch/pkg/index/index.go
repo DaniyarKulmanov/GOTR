@@ -1,7 +1,7 @@
 package index
 
 import (
-	"GOTR/GoSearch/pkg/crawler"
+	"GOTR/03-algorithms/GoSearch/pkg/crawler"
 	"sort"
 	"strings"
 )
