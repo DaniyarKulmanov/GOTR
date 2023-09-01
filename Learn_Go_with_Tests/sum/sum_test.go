@@ -1,0 +1,19 @@
+package sum
+
+import "testing"
+
+func TestSum(t *testing.T) {
+	t.Run("testing slice of any size", func(t *testing.T) {
+		numbers := []int{1, 2, 3}
+		got := Sum(numbers)
+		want := 6
+		assertErrorMessage(t, got, want, numbers)
+	})
+}
+
+func assertErrorMessage(t testing.TB, got, want int, numbers []int) {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %d want %d given, %v", got, want, numbers)
+	}
+}
